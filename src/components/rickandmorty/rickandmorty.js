@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./mainrick.css"
 const Rickandmorty = ({item}) => {
     return (
         <div className={'inner'}>
