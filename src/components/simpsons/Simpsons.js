@@ -1,5 +1,5 @@
 import React from 'react';
-import Simpson from "../simpson/simpson";
+import Simpson from "../simpson/Simpson";
 
 function Simpsons() {
     let simpsons = [

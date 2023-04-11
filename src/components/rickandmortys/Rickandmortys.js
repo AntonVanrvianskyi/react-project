@@ -1,5 +1,5 @@
 import React from 'react';
-import Rickandmorty from "../rickandmorty/rickandmorty";
+import Rickandmorty from "../rickandmorty/Rickandmorty";
 import "./main.css";
 const Rickandmortys = () => {
     let array = [

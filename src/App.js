@@ -1,7 +1,7 @@
 
 import './App.css';
-import Simpsons from "./components/simpsons/simpsons";
-import Rickandmortys from "./components/rickandmortys/rickandmortys";
+import Simpsons from "./components/simpsons/Simpsons";
+import Rickandmortys from "./components/rickandmortys/Rickandmortys";
 
 function App() {
   return (
