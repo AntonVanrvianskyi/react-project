@@ -1,10 +1,13 @@
 
 import './App.css';
+import Simpsons from "./components/simpsons/simpsons";
+import Rickandmortys from "./components/rickandmortys/rickandmortys";
 
 function App() {
   return (
     <div className="App">
-        hello
+        <Simpsons/>
+        <Rickandmortys/>
     </div>
   );
 }
