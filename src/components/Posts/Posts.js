@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import Post from "../Post/Post";
 
-const Posts = () => {
+const Posts = ({lift}) => {
+
+    
     let [posts, setPosts] = useState([])
    useEffect(()=>{
        fetch('https://jsonplaceholder.typicode.com/posts')
@@ -14,7 +16,7 @@ const Posts = () => {
     return (
         <div>
             {
-                posts.map(value => <Post key={value.id} post={value}/>)
+                posts.map(value => <Post key={value.id} post={value} lift={lift}/>)
             }
         </div>
     );
