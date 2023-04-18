@@ -9,7 +9,9 @@ const carValidator = Joi.object({
         'number.min':'Поле більше нуля',
         'number.required':'Це поле обов\'язкове'
     }),
-    year: Joi.number().min(1990).max(new Date().getFullYear()).required()
+    year: Joi.number().min(1990).max(new Date().getFullYear()).required().messages({
+        'number.min':'Рік не менше ніж 1990'
+    })
 })
 export {
     carValidator
