@@ -5,7 +5,7 @@ const CarService = {
     getAll:()=>axiosCarService.get(urls.car),
     create:(car)=> axiosCarService.post(urls.car, car),
     delete: (id)=>axiosCarService.delete(`${urls.car}/${id}`),
-    update:(id, car)=>axiosCarService.put(`${urls.car}/${id}`,car)
+    update:(id, car)=>axiosCarService.patch(`${urls.car}/${id}`,car)
 }
 export {
     CarService

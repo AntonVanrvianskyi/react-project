@@ -16,13 +16,13 @@ useEffect(()=>{
         reset()
     }
     const update = async (car)=>{
-        const  {data} =await CarService.update(car.id, car)
-
+        await CarService.update(updateCar.id, car).then(value => value.data).then(value => setCreateCar((prev)=>[...prev,value]))
+        reset()
 
     }
 
     return (
-        <form onSubmit={handleSubmit(updateCar?update:save)}>
+        <form onSubmit={handleSubmit(updateCar && updateCar.length === 0 ? save : update)}>
             <input placeholder={'brand'} {...register('brand')}/>
             <input placeholder={'year'} {...register('year')}/>
             <input placeholder={'price'} {...register('price')}/>
