@@ -8,8 +8,8 @@ const Cars = () => {
 
     const [cars, setCars] = useState([]);
     const [createCar, setCreateCar] = useState([]);
-    const [updateCar, setUpdateCar] = useState({});
-    // const [deleteCar, setDeleteCar] = useState({})
+    const [updateCar, setUpdateCar] = useState(null);
+
 
 
     useEffect(()=>{
@@ -22,7 +22,7 @@ const Cars = () => {
             <CarForm setCreateCar={setCreateCar} updateCar={updateCar}  />
             <hr/>
             {
-                cars.map(car=><Car key={car.id} car={car} setUpdateCar={setUpdateCar}  />)
+                cars.map(car=><Car key={car.id} car={car} setUpdateCar={setUpdateCar} setCreateCar={setCreateCar} />)
             }
         </div>
     );

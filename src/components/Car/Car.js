@@ -1,11 +1,11 @@
 import React, {useEffect,useState} from 'react';
 import {CarService} from "../../services/Car.services";
 
-const Car = ({car,setUpdateCar}) => {
+const Car = ({car,setUpdateCar,setCreateCar}) => {
     const {brand, price, year} = car
 
     const del = async (car) => {
-      await CarService.delete(car.id)
+      await CarService.delete(car.id).then(value => value.data).then(value => setCreateCar(value))
 
     }
     return (
