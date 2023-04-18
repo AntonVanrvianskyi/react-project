@@ -1,11 +1,11 @@
 import {axiosService} from "./axios-service";
-import {baseURL, urls} from "../configs/urls";
+import {urls} from "../configs/urls";
 
-const commentsService = {
+const CommentsService = {
     getAll:()=> axiosService.get(urls.comments),
-    post:()=> axiosService.post(urls.comments)
+    post:(comment)=> axiosService.post(urls.comments, comment)
 }
 
 export {
-    commentsService
+    CommentsService
 }

@@ -1,22 +1,22 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useForm} from "react-hook-form";
 import {UserService} from "../../services/User-service";
 
 
 const UserForm = ({setUsers}) => {
-const {register,handleSubmit} = useForm()
+const {register,handleSubmit, reset} = useForm()
 
      const save = async (user) => {
-      const {data} = await UserService.post(user)
-         // console.log(data)
-         setUsers(data)
+       await UserService.post(user).then(value => value.data).then(value => setUsers((prev)=>[...prev, value]))
+         reset()
+
 
     }
     return (
         <form onSubmit={handleSubmit(save)}>
-           <input placeholder={'Name'} {...register('Name')}/>
-            <input placeholder={'Surname'} {...register('Surname')}/>
-            <input placeholder={'Email'} {...register('Email')}/>
+           <input placeholder={'Name'} {...register('name')}/>
+            <input placeholder={'User-name'} {...register('username')}/>
+            <input placeholder={'Email'} {...register('email')}/>
             <button>Save</button>
 
 
