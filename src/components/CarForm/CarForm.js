@@ -4,27 +4,32 @@ import {CarService} from "../../services/Car.services";
 import {joiResolver} from "@hookform/resolvers/joi";
 import {carValidator} from "../Validators/Validators";
 
-const CarForm = ({setCreateCar,updateCar}) => {
+const CarForm = ({setCarForUpdate,setOnChange,carForUpdate}) => {
     const {register,reset,handleSubmit, setValue, formState:{errors} } = useForm({mode:"all", resolver:joiResolver(carValidator)});
 useEffect(()=>{
-    if (updateCar){
-        setValue('brand', updateCar.brand)
-        setValue('year', updateCar.year)
-        setValue('price', updateCar.price)
+    if (carForUpdate){
+        setValue('brand', carForUpdate.brand)
+        setValue('year', carForUpdate.year)
+        setValue('price', carForUpdate.price)
     }
-},[updateCar])
+},[carForUpdate])
     const save = async (car)=>{
-        await CarService.create(car).then(value => value.data).then(value => setCreateCar(value));
+        await CarService.create(car);
+        setOnChange(prevState => !prevState)
         reset()
     }
+
+
     const update = async (car)=>{
-        await CarService.update(updateCar.id, car).then(value => value.data).then(value => setCreateCar(value))
+        await CarService.update(carForUpdate.id, car)
+        setOnChange(prevState => !prevState)
         reset()
+        setCarForUpdate(false)
 
     }
 
     return (
-        <form onSubmit={handleSubmit(updateCar ? update : save)}>
+        <form onSubmit={handleSubmit(carForUpdate ? update : save)}>
             <input placeholder={'brand'} {...register('brand')}/>
             {errors.brand && <span>{errors.brand.message}</span>}
             <input placeholder={'year'} {...register('year')}/>
