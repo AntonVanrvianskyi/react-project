@@ -5,7 +5,7 @@ const Car = ({car,setUpdateCar}) => {
     const {brand, price, year} = car
 
     const del = async (car) => {
-      CarService.delete(car.id)
+      await CarService.delete(car.id)
 
     }
     return (
