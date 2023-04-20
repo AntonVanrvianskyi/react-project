@@ -8,7 +8,7 @@ const Posts = () => {
          const{postId} = params
     const [posts, setPosts] = useState(null);
          useEffect(()=>{
-             postsService.getById(postId.toString()).then(value => value.data).then(value => setPosts(value))
+             postsService.getById(postId).then(value => value.data).then(value => setPosts(value))
          },[posts])
 
     return (

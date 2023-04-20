@@ -1,10 +1,10 @@
 import React from 'react';
 import './Post.css'
 const Post = ({post}) => {
-    const {title, id} = post
+    const {id, body} = post
     return (
         <div className={'post'}>
-            <div>{id}. {title}</div>
+            <div>{id}. {body}</div>
         </div>
     );
 };
