@@ -1,0 +1,29 @@
+.container-form{
+    width: 100%;
+    height: 100%;
+
+    backdrop-filter: blur(10px);
+    position: absolute;
+}
+
+
+.car-form-update{
+    width: 250px;
+    height: 300px;
+    position: relative;
+    top:270px;
+    left:630px
+}
+.form-update{
+
+    display: flex;
+    flex-direction: column;
+}
+.input-form-update{
+    height: 30px;
+    margin-top: 5px;
+    text-align: center;
+}
+.button-form-update{
+    margin-top: 5px;
+}
