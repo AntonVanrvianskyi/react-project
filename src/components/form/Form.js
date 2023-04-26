@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react';
 import {useForm} from "react-hook-form";
-import Cat from "./Cat";
+
 
 
 const reducer = (state,action) => {
