@@ -1,34 +1,26 @@
 import React, {useReducer} from 'react';
 import {useForm} from "react-hook-form";
 import Dog from "./Dog";
-import {MyContext} from "./Form";
-const reducer = (state, action) => {
-  switch (action.type){
-      case 'dog':
-          return{
-              ...state,
-              dogs:[...state.dogs, action.payload]
-          }
-  }
-}
-const DogForm = () => {
 
-    const [state, dispatch] = useReducer(reducer, {dogs:[]})
-    const {register,handleSubmit, reset} = useForm()
-    const saveDog = (dog) => {
-        dispatch({type:'dog', payload:dog.dog})
+const DogForm = ({stateReducer}) => {
+
+    const [{dogs}, dispatch] = stateReducer
+    const {register, reset, handleSubmit} = useForm()
+    const save = (dog) => {
+        dispatch({type:'ADD_DOG', payload:dog})
         reset()
     }
     return (
         <div>
-        <form onSubmit={handleSubmit(saveDog)}>
-            <label>Add Dog:  </label>
-            <input placeholder={'dog'} {...register('dog')}/>
-            <button>Save</button>
-        </form>
             <div>
-                {state.dogs.map((dog,index)=><Dog key={index} dog={dog}/>)}
+            <form onSubmit={handleSubmit(save)}>
+                <label>Add Dog:  </label>
+                <input placeholder={'dog'} {...register('name')}/>
+                <button>Save</button>
+            </form>
             </div>
+
+            {dogs.map(dog=><Dog key={dog.id} dog={dog} stateReducer={stateReducer}/>)}
 
         </div>
     );

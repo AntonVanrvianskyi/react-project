@@ -1,58 +1,59 @@
-import React, {createContext, useReducer} from 'react';
+import React, {useReducer} from 'react';
 import {useForm} from "react-hook-form";
-import Cat from "./Cat";
-import './DogFom.css'
-import Dog from "./Dog";
 import DogForm from "./DogForm";
-import {defaults} from "axios";
+import './Form.css'
+import Cat from "./Cat/Cat";
 
-const MyContext = createContext('default')
+
+
 const reducer = (state,action) => {
-    switch (action.type) {
-        case 'cat':
-            return {
-                ...state,
-                cats: [...state.cats, action.payload]
-            }
-
-
-
-    }
-    return {...state}
+  switch (action.type){
+      case 'ADD_CAT':
+          const cat = action.payload
+          const catID = state.cats.slice(-1)[0]?.id+1||1
+          cat.id = catID
+          return{...state,cats:[...state.cats, cat]}
+      case 'DELETE_CAT':
+          const idForDeleteCat= action.payload
+          const catIndex = state.cats.findIndex(value => value.id===idForDeleteCat)
+          state.cats.splice(catIndex,1)
+          return {...state}
+      case 'ADD_DOG':
+          const dog = action.payload
+          return {...state, dogs:[...state.dogs, dog]}
+      case 'DELETE_DOG':
+          const idForDeleteDog= action.payload
+          const dogIndex = state.cats.findIndex(value => value.id===idForDeleteDog)
+          state.dogs.splice(dogIndex,1)
+          return {...state}
+  }
 }
+
+
 const Form = () => {
 
-
-    const [state,dispatch] = useReducer(reducer,{cats:[], dogs:[] });
-
-    const {register,handleSubmit, reset} = useForm()
-
-
+    const stateReducer = useReducer(reducer,{cats:[], dogs:[]});
+    const [state, dispatch] = stateReducer
+    const {register, reset, handleSubmit} = useForm();
     const save = (cat) => {
-        dispatch({type:'cat', payload:cat.name})
+        dispatch({type:'ADD_CAT', payload:cat})
         reset()
-
     }
 
     return (
-
-        <div className={'dog-form'}>
-                <form className={'cat-form'} onSubmit={handleSubmit(save)}>
-                    <label>Add Cat:  </label>
-                    <input placeholder={'cat'} {...register('name')}/>
-                    <button>Save</button>
-                </form>
-
-            <DogForm/>
-
-
-            {state.cats.map((cat,index)=><Cat key={index} cat={cat}/>)}
-
+        <div>
+            <div className={'form'}>
+           <form className={'cat-form'} onSubmit={handleSubmit(save)}>
+               <label>Add Cat:  </label>
+               <input placeholder={'cat'} {...register('name')}/>
+               <button>Save</button>
+           </form>
+                    <DogForm stateReducer={stateReducer}/>
 
         </div>
-
-
+            {state.cats.map((cat)=><Cat key={cat.id} cat={cat} stateReducer={stateReducer}/>)}
+        </div>
     );
 };
 
-export default Form
+export default Form;

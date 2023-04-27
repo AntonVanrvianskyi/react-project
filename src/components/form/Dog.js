@@ -1,10 +1,11 @@
 import React from 'react';
-import './DogFom.css'
-const Dog = ({dog}) => {
+
+const Dog = ({dog,stateReducer}) => {
+    const [,dispatch] = stateReducer
     return (
-        <div className={'dog'}>
-            <div>{dog}</div>
-            <button>Delete</button>
+        <div>
+            <div>{dog.name}</div>
+            <button onClick={()=>dispatch({type:'DELETE_DOG', payload:dog.id})}>Delete</button>
         </div>
     );
 };
