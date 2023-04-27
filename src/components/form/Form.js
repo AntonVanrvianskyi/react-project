@@ -26,6 +26,8 @@ const reducer = (state,action) => {
           const dogIndex = state.cats.findIndex(value => value.id===idForDeleteDog)
           state.dogs.splice(dogIndex,1)
           return {...state}
+      default:
+          return {...state}
   }
 }
 
