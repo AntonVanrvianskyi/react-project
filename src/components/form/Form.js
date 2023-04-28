@@ -20,10 +20,12 @@ const reducer = (state,action) => {
           return {...state}
       case 'ADD_DOG':
           const dog = action.payload
+          const dogID = state.dogs.slice(-1)[0]?.id+1||1
+          dog.id = dogID
           return {...state, dogs:[...state.dogs, dog]}
       case 'DELETE_DOG':
           const idForDeleteDog= action.payload
-          const dogIndex = state.cats.findIndex(value => value.id===idForDeleteDog)
+          const dogIndex = state.dogs.findIndex(value => value.id===idForDeleteDog)
           state.dogs.splice(dogIndex,1)
           return {...state}
       default:
