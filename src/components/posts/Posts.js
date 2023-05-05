@@ -1,24 +1,36 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
-import {postService} from "../../services/post.service";
 import {postActions} from "../../redux";
 import Post from "../post/Post";
+import Pagination from "../pagination/Pagination";
 
 const Posts = () => {
+
+
+
+
+
     const dispatch = useDispatch();
-    const {posts} = useSelector(state => state.posts)
+    const {posts, currentPerPage, currentPage} = useSelector(state => state.posts)
 
     useEffect(()=>{
-        postService.getAll().then(value => value.data).then(value => dispatch(postActions.setPosts(value)))
-    },[dispatch])
+       dispatch(postActions.setPosts())
+    },[dispatch]);
+
+    const lastIndex = currentPage * currentPerPage;
+    const startIndex = lastIndex - currentPerPage;
+    const currentPost = posts.slice(startIndex, lastIndex)
+
 
     return (
         <div>
             {
-                posts.map(post=><Post key={post.id} post={post}/>)
+                currentPost.map(post=><Post key={post.id} post={post}/>)
             }
+            <Pagination total={posts.length}/>
         </div>
+
     );
 };
 
